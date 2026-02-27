@@ -1,4 +1,4 @@
-# ArUco-TUI (v.25.1)
+# ArUcoTUI (v.25.1)
 
 **ArUcoTUI** is a software toolkit for rapid TUI (Tangible User Interface) prototyping on portable screens. It uses standard cameras, OpenCV, and ArUco markers for real-time object tracking.
 
@@ -20,10 +20,10 @@ The server designed for real-time ArUco fiducial marker detection and pose estim
 
 
 * **Data Transmission:** Pose data is sent as a single OSC message containing:
-* Marker ID
-* Translation vector ($t_x, t_y, t_z$)
-* Euler angles ($r_x, r_y, r_z$)
-* Pixel coordinates of the four marker corners.
+- Marker ID
+- Translation vector ($t_x, t_y, t_z$)
+- Euler angles ($r_x, r_y, r_z$)
+- Pixel coordinates of the four marker corners.
 
 ---
 
@@ -46,7 +46,7 @@ The client software is based on **Processing**. It defines interactive data repr
 
 ---
 
-## 3.3 Hardware Implementation and Performance
+## Hardware Implementation and Performance
 
 The implementation was tested using the following hardware stack:
 
