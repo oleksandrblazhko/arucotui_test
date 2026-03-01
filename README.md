@@ -1,4 +1,4 @@
-# ArUcoTUI (v.25.1)
+# ArUcoTUI (v.25.3)
 
 **ArUcoTUI** is a software toolkit for rapid TUI (Tangible User Interface) prototyping on portable screens. It uses standard cameras, OpenCV, and ArUco markers for real-time object tracking.
 
