@@ -1,5 +1,5 @@
 //*********************************************
-// Example Code: ArUco-TUI Client v25.3
+// Example Code: ArUco-TUI Client v26.1
 // ArUCo Fiducial Marker Detection in OpenCV Python and then send to Processing via OSC
 // Tracking Tangibles on a Surface or Flat Panel Display with 15mm-width Markers
 // Rong-Hao Liang: r.liang@tue.nl
@@ -15,8 +15,8 @@ OscP5 oscP5;
 int[][] TO_IDs = {{48}, {49}, {50}, {51}};
 PVector[][] TO_Offsets = {{new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}};
 ////set the paper width on screen (initial value: 297; unit mm)
-float paperWidthOnScreen = 168; //First measure the real-world size of the clibration sheet.
-//float paperWidthOnScreen = 193.5; //After measurement, change this parameter. 
+//float paperWidthOnScreen = 297; //First measure the real-world size of the clibration sheet.
+float paperWidthOnScreen = 193.5; //After measurement, change this parameter. 
 ////set the marker width on screen
 float markerWidth = 15; //(mm) change this if the marker is of a different width
 ////set the touch threshold (unit: m)
@@ -27,10 +27,11 @@ ArrayList<DataObject> DOlist = new ArrayList<DataObject>(); //the data objects
 int gestureMode = 2; //try 1 to 3.
 
 void initDataObjects() { //set up the data objects
-  DOlist.add(new DataObject(0, false, 10, width/2-200, height/2-200, 300, "Obj. 1"));
-  DOlist.add(new DataObject(1, false, 10, width/2+200, height/2-200, 300, "Obj. 2"));
-  DOlist.add(new DataObject(2, false, 10, width/2-200, height/2+200, 300, "Obj. 3"));
-  DOlist.add(new DataObject(3, false, 10, width/2+200, height/2+200, 300, "Obj. 4"));
+  float dataObjSize = 200;
+  DOlist.add(new DataObject(0, false, 10, width/2-dataObjSize, height/2-dataObjSize, dataObjSize, "Obj. 1"));
+  DOlist.add(new DataObject(1, false, 10, width/2+dataObjSize, height/2-dataObjSize, dataObjSize, "Obj. 2"));
+  DOlist.add(new DataObject(2, false, 10, width/2-dataObjSize, height/2+dataObjSize, dataObjSize, "Obj. 3"));
+  DOlist.add(new DataObject(3, false, 10, width/2+dataObjSize, height/2+dataObjSize, dataObjSize, "Obj. 4"));
 }
 
 void setup() {
@@ -39,6 +40,7 @@ void setup() {
   loadCalibrationImg("ArUco_Grid15.png"); //load calibration image
   initTagManager(); //initialize tag manager
   initDataObjects(); //initialize the data objects.
+  loadCalibrationFile("corners.txt");
 }
 
 void draw() {
@@ -50,6 +52,7 @@ void draw() {
       calculateHomographyMatrix(); //calculate the homography matrix
       registerPlanePoints(); //register the plane points for plane calculation.
       registerPlaneOrientation(); //register the plane orientation for plane calculation.
+      saveCalibrationFile("corners.txt");
       homographyMatrixCalculated = true; //set the homography matrix flag to "calculated"
     }
   } else {

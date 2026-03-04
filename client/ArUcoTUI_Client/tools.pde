@@ -4,8 +4,10 @@ boolean dataObjectDebug = false;
 boolean tagDebug = false;
 boolean serialDebug = false;
 
-PVector[] srcPoints = new PVector[4];
-PVector[] dstPoints = new PVector[4];
+PVector[] srcPointsT = new PVector[4];
+PVector[] dstPointsT = new PVector[4];
+PVector[] srcPointsR = new PVector[4];
+PVector[] dstPointsR = new PVector[4];
 PVector[] planePoints = new PVector[4];
 
 boolean homographyMatrixCalculated = false;
@@ -56,29 +58,95 @@ void loadCalibrationImg(String s) {
   imageOffset.set((width - calibImg.width)/2, (height - calibImg.height)/2); //center the calibration image
 }
 
+void loadCalibrationFile(String filename) {
+  String[] lines;
+  try {
+    lines = loadStrings(filename);
+    if (lines == null) {
+      throw new RuntimeException("File not found: srcPoints.txt");
+    }
+    // Initialize and parse srcPoints
+    PVector[] cornerPointsT = new PVector[lines.length];
+    PVector[] cornerPointsR = new PVector[lines.length];
+    for (int i = 0; i < lines.length; i++) {
+      String[] coords = split(lines[i], ",");
+      float tx = float(trim(coords[0]));
+      float ty = float(trim(coords[1]));
+      float tz = float(trim(coords[2]));
+      float rx = float(trim(coords[3]));
+      float ry = float(trim(coords[4]));
+      float rz = float(trim(coords[5]));
+      cornerPointsT[i] = new PVector(tx, ty, tz);
+      cornerPointsR[i] = new PVector(rx, ry, rz);
+      println(tx, ty, tz, rx, ry, rz);
+    }
+    calculateHomographyMatrix(cornerPointsT); //calculate the homography matrix
+    registerPlanePoints(); //register the plane points for plane calculation.
+    registerPlaneOrientation(cornerPointsR); //register the plane orientation for plane calculation.
+    homographyMatrixCalculated = true; //set the homography matrix flag to "calculated"
+  }
+  catch (Exception e) {
+    println("Error loading file: " + e.getMessage());
+  }
+}
+
+void saveCalibrationFile(String filename) {
+  srcPointsT[0] = new PVector(tm.tags[cornersID[0]].tx, tm.tags[cornersID[0]].ty, tm.tags[cornersID[0]].tz);
+  srcPointsT[1] = new PVector(tm.tags[cornersID[1]].tx, tm.tags[cornersID[1]].ty, tm.tags[cornersID[1]].tz);
+  srcPointsT[2] = new PVector(tm.tags[cornersID[2]].tx, tm.tags[cornersID[2]].ty, tm.tags[cornersID[2]].tz);
+  srcPointsR[0] = new PVector(tm.tags[cornersID[0]].rx, tm.tags[cornersID[0]].ry, tm.tags[cornersID[0]].rz);
+  srcPointsR[1] = new PVector(tm.tags[cornersID[1]].rx, tm.tags[cornersID[1]].ry, tm.tags[cornersID[1]].rz);
+  srcPointsR[2] = new PVector(tm.tags[cornersID[2]].rx, tm.tags[cornersID[2]].ry, tm.tags[cornersID[2]].rz);
+  String[] lines = new String[3];
+  for (int i = 0; i < 3; i++) {
+    lines[i] = nf((float)srcPointsT[i].x, 0, 3) + ", " + nf((float)srcPointsT[i].y, 0, 3) + ", " + nf((float)srcPointsT[i].z, 0, 3)+ ", " +
+               nf((float)srcPointsR[i].x, 0, 3) + ", " + nf((float)srcPointsR[i].y, 0, 3) + ", " + nf((float)srcPointsR[i].z, 0, 3);
+    println(lines[i]);
+  }
+  saveStrings("corners.txt", lines);
+}
+void calculateHomographyMatrix(PVector[] cornerPointsT) {
+  srcPointsT[0] = new PVector(cornerPointsT[0].x, cornerPointsT[0].y, cornerPointsT[0].z);
+  srcPointsT[1] = new PVector(cornerPointsT[1].x, cornerPointsT[1].y, cornerPointsT[1].z);
+  srcPointsT[2] = new PVector(cornerPointsT[2].x, cornerPointsT[2].y, cornerPointsT[2].z);
+
+  dstPointsT[0] = new PVector(0, 0);
+  dstPointsT[1] = new PVector(1, 0);
+  dstPointsT[2] = new PVector(1, 1);
+
+  homography = calculateHomography(srcPointsT, dstPointsT);
+}
+
 
 void calculateHomographyMatrix() {
-  srcPoints[0] = new PVector(tm.tags[cornersID[0]].tx, tm.tags[cornersID[0]].ty, tm.tags[cornersID[0]].tz);
-  srcPoints[1] = new PVector(tm.tags[cornersID[1]].tx, tm.tags[cornersID[1]].ty, tm.tags[cornersID[1]].tz);
-  srcPoints[2] = new PVector(tm.tags[cornersID[2]].tx, tm.tags[cornersID[2]].ty, tm.tags[cornersID[2]].tz);
+  srcPointsT[0] = new PVector(tm.tags[cornersID[0]].tx, tm.tags[cornersID[0]].ty, tm.tags[cornersID[0]].tz);
+  srcPointsT[1] = new PVector(tm.tags[cornersID[1]].tx, tm.tags[cornersID[1]].ty, tm.tags[cornersID[1]].tz);
+  srcPointsT[2] = new PVector(tm.tags[cornersID[2]].tx, tm.tags[cornersID[2]].ty, tm.tags[cornersID[2]].tz);
 
-  dstPoints[0] = new PVector(0, 0);
-  dstPoints[1] = new PVector(1, 0);
-  dstPoints[2] = new PVector(1, 1);
+  dstPointsT[0] = new PVector(0, 0);
+  dstPointsT[1] = new PVector(1, 0);
+  dstPointsT[2] = new PVector(1, 1);
   
-  homography = calculateHomography(srcPoints, dstPoints);
+  homography = calculateHomography(srcPointsT, dstPointsT);
 }
 
 void registerPlanePoints() {
-  planePoints[0] = new PVector(srcPoints[0].x, srcPoints[0].y, srcPoints[0].z);
-  planePoints[1] = new PVector(srcPoints[1].x, srcPoints[1].y, srcPoints[1].z);
-  planePoints[2] = new PVector(srcPoints[2].x, srcPoints[2].y, srcPoints[2].z);
+  planePoints[0] = new PVector(srcPointsT[0].x, srcPointsT[0].y, srcPointsT[0].z);
+  planePoints[1] = new PVector(srcPointsT[1].x, srcPointsT[1].y, srcPointsT[1].z);
+  planePoints[2] = new PVector(srcPointsT[2].x, srcPointsT[2].y, srcPointsT[2].z);
 }
 
 void registerPlaneOrientation(){
   global_rx= (tm.tags[cornersID[0]].rx + tm.tags[cornersID[1]].rx + tm.tags[cornersID[2]].rx)/3;
   global_ry= (tm.tags[cornersID[0]].ry + tm.tags[cornersID[1]].ry + tm.tags[cornersID[2]].ry)/3;
   global_rz= (tm.tags[cornersID[0]].rz + tm.tags[cornersID[1]].rz + tm.tags[cornersID[2]].rz)/3;
+  println(global_rx,global_ry,global_rz);
+}
+
+void registerPlaneOrientation(PVector[] cornerPointsR){
+  global_rx= (cornerPointsR[0].x + cornerPointsR[1].x + cornerPointsR[2].x)/3;
+  global_ry= (cornerPointsR[0].y + cornerPointsR[1].y + cornerPointsR[2].y)/3;
+  global_rz= (cornerPointsR[0].z + cornerPointsR[1].z + cornerPointsR[2].z)/3;
   println(global_rx,global_ry,global_rz);
 }
 
@@ -93,7 +161,7 @@ boolean cornersDetected() {
 }
 
 boolean isCorner(int id) {
-  if (id == cornersID[0] || id == cornersID[1] || id == cornersID[2]){
+  if (id == cornersID[0] || id == cornersID[1] || id == cornersID[2]) {
     return true;
   } else {
     return false;
@@ -176,4 +244,46 @@ float getAngleBetween(PVector p0, PVector p1) {
 
 PVector getCentroidBetween(PVector p0, PVector p1) {
   return PVector.add(p0, p1).div(2);
+}
+
+int whichTO(int id) {
+  for (int i = 0; i < TO_IDs.length; i++) {
+    if (TO_IDs[i][0] == id) {
+      return i;  // Return the index where the ID matches
+    }
+  }
+  return -1;  // Return -1 if the ID is not found
+}
+
+float mmToPx (float mm){
+  return mm * (72. / 25.4)*tag2screenRatio;
+}
+
+PVector getTiltAngles(PVector tilt2D, float angle2D) {
+  PVector obj = new PVector(global_rx, global_ry, global_rz);
+  PVector surf = new PVector(tilt2D.x, tilt2D.y, angle2D);
+  // 1. Generate Rotation Matrices for both
+  PMatrix3D R_s = getRotationMatrix(surf.x, surf.y, surf.z);
+  PMatrix3D R_o = getRotationMatrix(obj.x, obj.y, obj.z);
+  // 2. Get Relative Rotation: R_rel = (R_s^T) * R_o
+  // In rotation matrices, the Transpose is the Inverse.
+  R_s.transpose();
+  PMatrix3D R_rel = new PMatrix3D();
+  R_rel.set(R_s);
+  R_rel.apply(R_o);
+  float tilt_X = atan2(R_rel.m21, R_rel.m22);
+  float tilt_Y = atan2(-R_rel.m20, sqrt(sq(R_rel.m21) + sq(R_rel.m22)));
+  float relRoll = atan2(R_rel.m10, R_rel.m00);
+
+  PVector results = new PVector(tilt_X, -tilt_Y, relRoll);
+  return results;
+}
+
+PMatrix3D getRotationMatrix(float roll, float pitch, float yaw) {
+  PMatrix3D mat = new PMatrix3D();
+  // Standard ZYX order: Yaw (Z), then Pitch (Y), then Roll (X)
+  mat.rotateZ(yaw);
+  mat.rotateY(pitch);
+  mat.rotateX(roll);
+  return mat;
 }
