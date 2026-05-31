@@ -12,13 +12,13 @@ import processing.net.*;
 TagManager tm;
 OscP5 oscP5;
 ////set the TO IDs and offsets (unit: m)
-int[][] TO_IDs = {{1}};
-PVector[][] TO_Offsets = {{new PVector(0, 0, -0.025)}};
+int[][] TO_IDs = {{4}, {5}, {6}, {7}};
+PVector[][] TO_Offsets = {{new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}, {new PVector(0, 0, -0.025)}};
 ////set the paper width on screen (initial value: 297; unit mm)
 //float paperWidthOnScreen = 297; //First measure the real-world size of the clibration sheet.
 float paperWidthOnScreen = 193.5; //After measurement, change this parameter. 
 ////set the marker width on screen
-float markerWidth = 30; //(mm) change this if the marker is of a different width
+float markerWidth = 35; //(mm) change this if the marker is of a different width
 ////set the touch threshold (unit: m)
 float touchThreshold = 0.01; //change this to adjust sensitivity of touch sensing.
 

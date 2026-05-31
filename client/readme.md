@@ -20,16 +20,20 @@ The system tracks individual ArUco tags, groups them into "Tagged Objects" (TOs)
 ## **Setup**
 
 1. **Run External Detection:** Start your external ArUco detection script (e.g., Python, OpenCV) that sends OSC messages to this client's IP address on port 9000\.  
-2. **Configure Sketch:** Open ArUcoTUI\_Client.pde and configure the following:  
+2. **Prepare AruCo-markers**: 
+   * Use one of generators (https://chev.me/arucogen/) 
+   * Print on draw markers with the tag IDs
+3. **Configure Sketch:** Open ArUcoTUI\_Client.pde and configure the following:  
    * TO\_IDs: Define the tag IDs that make up each tangible object.  
    * TO\_Offsets: Define the 3D offsets (in meters) for each tag within its tangible object.  
    * paperWidthOnScreen: Measure the real-world width (in mm) of your calibration sheet and update this value.  
    * markerWidth: The width (in mm) of your markers.  
    * touchThreshold: The distance (in meters) from the plane to consider a TO as "touching".  
-3. **Run Processing Sketch:** Run the ArUcoTUI\_Client.pde file.  
-4. **Calibrate:**  
+4. **Run Processing Sketch:** Run the ArUcoTUI\_Client.pde file.  
+5. **Calibrate:**  
    * The sketch will start in calibration mode, showing the calibration image.  
-   * Place the calibration sheet (with corner markers 1, 3, 2\) on the surface so it's visible to the camera.  
+   * Prepare the calibration sheet with corner-markers (original ArUco-markers Id=1,3,2,0 clockwise from the top left corner) - client\ArUcoTUI_Client\data\ArUco_Grid15.png
+   * Place the calibration sheet on the surface so it's visible to the camera.  
    * Once all corner markers are detected, the sketch will automatically calculate the homography and switch to interaction mode.  
    * Press the SPACE bar at any time to re-enter calibration mode.
 
