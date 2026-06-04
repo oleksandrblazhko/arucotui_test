@@ -65,7 +65,7 @@ def marker_handler(address, *args, scale_x=1.0, scale_y=1.0):
 # --- Main Application Logic ---
 async def main_loop(width, height, proximity_threshold):
     global last_beep_time
-    # Removed beepy warning as winsound is built-in
+    frame_counter = 0 # Initialize frame counter
 
     while True:
         frame = np.full((height, width, 3), 255, dtype=np.uint8)
@@ -76,16 +76,19 @@ async def main_loop(width, height, proximity_threshold):
             if current_time - marker.timestamp > MARKER_TIMEOUT:
                 del markers[marker_id]
 
-        # --- Proximity Check for Internal Markers ---
-        internal_markers = [m for m in markers.values() if m.marker_id not in BOUNDARY_IDS]
-        if len(internal_markers) >= 2:
-            for marker1, marker2 in itertools.combinations(internal_markers, 2):
-                distance = np.linalg.norm(marker1.get_pos_3d() - marker2.get_pos_3d())
-                if distance < proximity_threshold:
-                    if current_time - last_beep_time > SOUND_COOLDOWN:
-                        last_beep_time = current_time
-                        asyncio.create_task(play_beep())
-                    break # Only beep once per frame
+        # --- Proximity Check for Internal Markers (optimized) ---
+        if frame_counter % 5 == 0: # Only check every 5th frame
+            internal_markers = [m for m in markers.values() if m.marker_id not in BOUNDARY_IDS]
+            if len(internal_markers) >= 2:
+                for marker1, marker2 in itertools.combinations(internal_markers, 2):
+                    distance = np.linalg.norm(marker1.get_pos_3d() - marker2.get_pos_3d())
+                    if distance < proximity_threshold:
+                        if current_time - last_beep_time > SOUND_COOLDOWN:
+                            last_beep_time = current_time
+                            asyncio.create_task(play_beep())
+                        break # Only beep once per frame
+        
+        frame_counter += 1 # Increment frame counter
 
         # --- Visualization ---
         boundary_markers = {mid: markers[mid] for mid in BOUNDARY_IDS if mid in markers}
@@ -115,7 +118,7 @@ async def main_loop(width, height, proximity_threshold):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
             
-        await asyncio.sleep(0.01)
+        await asyncio.sleep(0.001)
 
     cv2.destroyAllWindows()
 
@@ -123,7 +126,6 @@ async def init_main(args):
     scale_x = args.width / args.source_width
     scale_y = args.height / args.source_height
     
-    # Calculate the proximity threshold based on marker size and desired gap
     proximity_threshold = args.marker_size + args.proximity_gap
 
     handler_with_scaling = functools.partial(marker_handler, scale_x=scale_x, scale_y=scale_y)
@@ -144,8 +146,8 @@ if __name__ == '__main__':
     parser.add_argument("--height", type=int, default=720, help="Client window height")
     parser.add_argument("--source-width", type=int, default=640, help="Source (server) camera width")
     parser.add_argument("--source-height", type=int, default=480, help="Source (server) camera height")
-    parser.add_argument("--marker-size", type=float, default=0.015, help="Physical size of the markers in meters")
-    parser.add_argument("--proximity-gap", type=float, default=0.005, help="Desired visual gap between markers for proximity alert (in meters)")
+    parser.add_argument("--marker-size", type=float, default=0.02, help="Physical size of the markers in meters")
+    parser.add_argument("--proximity-gap", type=float, default=0.01, help="Desired visual gap between markers for proximity alert (in meters)")
     args = parser.parse_args()
 
     try:
