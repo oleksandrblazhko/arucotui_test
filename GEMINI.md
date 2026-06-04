@@ -40,13 +40,13 @@ The server is responsible for camera capture and marker detection.
     From the `server` directory, run the `marker.py` script. You can specify the camera index and resolution.
     ```bash
     # Example: Use camera 0 with 1280x720 resolution
-    python marker.py --cam 0 --width 1280 --height 720
-    ```
-    The server will start sending OSC data to `127.0.0.1:9000`.
+    python marker.pyill start sending OSC data to `127.0.0.1:9000`.
 
 ### Running the Client (Processing)
 
-The client receives OSC data and runs the interactive application.
+The client receives --cam 0 --width 1280 --height 720
+    ```
+    The server w OSC data and runs the interactive application.
 
 1.  **Prerequisites:**
     *   Processing IDE (4.x or later).

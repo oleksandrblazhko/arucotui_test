@@ -1,10 +1,19 @@
 import cv2
 import time
 import numpy as np
+import os
 
 CAM_INDEX = 0
 MARKER_SIZE = 0.035
 TEST_TIME = 15
+
+if os.path.exists('camera_ext.json'):
+    with open('camera_ext.json', 'r') as json_file:
+        camera_data = json.load(json_file)
+    camera_matrix = np.array(camera_data["mtx"])
+    dist_coeffs = np.array(camera_data["dist"])
+    print("INFO: Camera calibration loaded from camera_ext.json")
+
 
 
 def run_test(dictionary, name):
@@ -138,7 +147,7 @@ if __name__ == "__main__":
     print("====================")
     input("Fix setup if needed, then press ENTER for next test...")
 
-    res_5x5 = run_test(cv2.aruco.DICT_ARUCO_ORIGINAL, "DICT_5X5_100")
+    res_5x5 = run_test(cv2.aruco.DICT_ARUCO_ORIGINAL, "DICT_ARUCO_ORIGINAL")
 
     print("\n====================")
     print("FINAL COMPARISON")
