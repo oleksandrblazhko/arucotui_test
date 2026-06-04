@@ -27,23 +27,30 @@ It features a user interface in the OpenCV window, allowing for real-time contro
     * opencv-contrib-python==4.6.0.66 # Specific OpenCV Computer Vision library that includes ArUco marker detection
     * python-osc # OSC (open-sound-communication) protocol for data exchange between Python software and other software
     * numpy==1.23 # Specific NumPy library for ArUco markers
-3.  **Camera Calibration**: You MUST generate a camera calibration file for your webcam.
-    * This script requires a `.json` file containing your camera's intrinsic matrix (`mtx`) and distortion coefficients (`dist`).
-    * You can use OpenCV's built-in functions (e.g., with a chessboard pattern) to generate these.
-    * By default, the script looks for `camera_ext.json`. You can specify a different file using the `--profile` argument.
+3.  **Camera Calibration**: You MUST calibrate your camera to ensure accurate marker detection. A script is provided to automate this process.
 
-    An example `camera_ext.json` file format:
-    ```json
-    {
-        "mtx": [
-            [1000.0, 0.0, 640.0],
-            [0.0, 1000.0, 360.0],
-            [0.0, 0.0, 1.0]
-        ],
-        "dist": [
-            [0.1, -0.2, 0.0, 0.0, 0.05]
-        ]
-    }
+    *   **Prerequisites**: You need a printed chessboard pattern. The script is configured to find a pattern with **9 horizontal and 6 vertical internal corners**.
+        *   When using an online generator (like `https://calib.io/pages/camera-calibration-pattern-generator`), you must specify the **number of squares**, which should be **10 squares wide by 7 squares high**.
+        *   Example settings for a generator:
+            *   **Target Type:** `Checkerboard`
+            *   **Columns (width):** `10`
+            *   **Rows (height):** `7`
+            *   **Checker Width:** A size that is easy for your camera to see (e.g., `15mm` or `20mm`).
+        *   Print the pattern on a flat, non-reflective surface for the best results.
+
+    *   **Run the calibration script**:
+        ```bash
+        python calibrate_camera.py
+        ```
+    *   **Follow the instructions**:
+        1.  A window will appear showing your camera feed.
+        2.  Show the printed chessboard to the camera. Hold it at different angles and distances.
+        3.  The script will automatically collect samples when it clearly sees the chessboard.
+        4.  Once it has enough samples, it will calculate the calibration data and save it to `camera_ext.json`.
+
+    This will generate the `camera_ext.json` file required by the main `marker.py` script. The file contains the camera's intrinsic matrix (`mtx`) and distortion coefficients (`dist`). If you want to use a different camera, you can re-run the script and specify the camera index:
+    ```bash
+    python calibrate_camera.py --cam 1
     ```
 
 ## Usage
@@ -65,7 +72,7 @@ python marker.py [ARGUMENTS]
 | \--pattern | The initial marker dictionary to use (see controls). | 0 |
 | \--size | The size of the markers in meters. | 0.015 |
 | \--flip | Set to 1 to flip the camera view horizontally. | 0 |
-
+| \--win' | Set Windows camera mode | non |
 ## **Runtime Controls**
 
 While the OpenCV window is active, you can use the following keys:
