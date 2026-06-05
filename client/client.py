@@ -39,8 +39,8 @@ class Marker:
 
 # --- Global Storage for Markers ---
 markers = {}
-BOUNDARY_IDS = {0, 1, 2, 3}
-MARKER_TIMEOUT = 0.05  # seconds
+BOUNDARY_IDS = {1, 2, 3, 5}
+MARKER_TIMEOUT = 0.2  # seconds
 
 # --- Sound Function ---
 async def play_beep():
@@ -63,12 +63,16 @@ def marker_handler(address, *args, scale_x=1.0, scale_y=1.0):
         markers[marker_id] = Marker(marker_id, tx, ty, tz, roll, pitch, yaw, scaled_corners)
 
 # --- Main Application Logic ---
-async def main_loop(width, height, proximity_threshold):
+async def main_loop(width, height, proximity_threshold, no_text=False, no_proximity_check=False):
     global last_beep_time
     frame_counter = 0 # Initialize frame counter
 
+    # Create the frame once, outside the loop
+    frame = np.full((height, width, 3), 255, dtype=np.uint8)
+
     while True:
-        frame = np.full((height, width, 3), 255, dtype=np.uint8)
+        # Clear the frame instead of reallocating
+        frame[:] = 255
         current_time = time.time()
 
         # --- Prune old markers ---
@@ -77,26 +81,30 @@ async def main_loop(width, height, proximity_threshold):
                 del markers[marker_id]
 
         # --- Proximity Check for Internal Markers (optimized) ---
-        if frame_counter % 5 == 0: # Only check every 5th frame
-            internal_markers = [m for m in markers.values() if m.marker_id not in BOUNDARY_IDS]
-            if len(internal_markers) >= 2:
-                for marker1, marker2 in itertools.combinations(internal_markers, 2):
-                    distance = np.linalg.norm(marker1.get_pos_3d() - marker2.get_pos_3d())
-                    if distance < proximity_threshold:
-                        if current_time - last_beep_time > SOUND_COOLDOWN:
-                            last_beep_time = current_time
-                            asyncio.create_task(play_beep())
-                        break # Only beep once per frame
+        if not no_proximity_check:
+            if frame_counter % 10 == 0: # Only check every 10th frame
+                internal_markers = [m for m in markers.values() if m.marker_id not in BOUNDARY_IDS]
+                if len(internal_markers) >= 2:
+                    for marker1, marker2 in itertools.combinations(internal_markers, 2):
+                        distance = np.linalg.norm(marker1.get_pos_3d() - marker2.get_pos_3d())
+                        if distance < proximity_threshold:
+                            if current_time - last_beep_time > SOUND_COOLDOWN:
+                                last_beep_time = current_time
+                                asyncio.create_task(play_beep())
+                            break # Only beep once per frame
         
         frame_counter += 1 # Increment frame counter
 
         # --- Visualization ---
         boundary_markers = {mid: markers[mid] for mid in BOUNDARY_IDS if mid in markers}
         if len(boundary_markers) == 4:
-            p0 = boundary_markers[0].get_center()
-            p1 = boundary_markers[1].get_center()
-            p2 = boundary_markers[2].get_center()
-            p3 = boundary_markers[3].get_center()
+            # Sort the boundary IDs to ensure consistent drawing order
+            sorted_ids = sorted(list(boundary_markers.keys()))
+
+            p0 = boundary_markers[sorted_ids[0]].get_center()
+            p1 = boundary_markers[sorted_ids[1]].get_center()
+            p2 = boundary_markers[sorted_ids[2]].get_center()
+            p3 = boundary_markers[sorted_ids[3]].get_center()
             
             cv2.line(frame, tuple(p0), tuple(p1), (0, 255, 0), 2)
             cv2.line(frame, tuple(p1), tuple(p2), (0, 255, 0), 2)
@@ -106,19 +114,20 @@ async def main_loop(width, height, proximity_threshold):
         for marker_id, marker in list(markers.items()):
             cv2.polylines(frame, [marker.corners], isClosed=True, color=(255, 0, 0), thickness=2)
             
-            text_id = f"id: {marker_id}"
-            text_coords = f"{marker.tx*1000:.0f}, {marker.ty*1000:.0f}, {marker.tz*1000:.0f})"
-            
-            text_pos = marker.corners[0]
-            cv2.putText(frame, text_id, (text_pos[0], text_pos[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
-            cv2.putText(frame, text_coords, (text_pos[0], text_pos[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
+            if not no_text:
+                text_id = f"id: {marker_id}"
+                text_coords = f"{marker.tx*1000:.0f}, {marker.ty*1000:.0f}, {marker.tz*1000:.0f})"
+                
+                text_pos = marker.corners[0]
+                cv2.putText(frame, text_id, (text_pos[0], text_pos[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
+                cv2.putText(frame, text_coords, (text_pos[0], text_pos[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
 
         cv2.imshow("Client", frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
             
-        await asyncio.sleep(0.001)
+        await asyncio.sleep(1/60)
 
     cv2.destroyAllWindows()
 
@@ -134,7 +143,7 @@ async def init_main(args):
     server = AsyncIOOSCUDPServer((args.ip, args.port), dispatcher, asyncio.get_event_loop())
     transport, protocol = await server.create_serve_endpoint()
     try:
-        await main_loop(args.width, args.height, proximity_threshold)
+        await main_loop(args.width, args.height, proximity_threshold, args.no_text, args.no_proximity_check)
     finally:
         transport.close()
 
@@ -146,8 +155,10 @@ if __name__ == '__main__':
     parser.add_argument("--height", type=int, default=720, help="Client window height")
     parser.add_argument("--source-width", type=int, default=640, help="Source (server) camera width")
     parser.add_argument("--source-height", type=int, default=480, help="Source (server) camera height")
-    parser.add_argument("--marker-size", type=float, default=0.02, help="Physical size of the markers in meters")
-    parser.add_argument("--proximity-gap", type=float, default=0.01, help="Desired visual gap between markers for proximity alert (in meters)")
+    parser.add_argument("--marker-size", type=float, default=0.012, help="Physical size of the markers in meters")
+    parser.add_argument("--proximity-gap", type=float, default=0.007, help="Desired visual gap between markers for proximity alert (in meters)")
+    parser.add_argument("--no-text", action="store_true", help="Disable drawing text for each marker to improve performance")
+    parser.add_argument("--no-proximity-check", action="store_true", help="Disable proximity check to improve performance")
     args = parser.parse_args()
 
     try:
