@@ -115,12 +115,12 @@ async def main_loop(width, height, proximity_threshold, no_text=False, no_proxim
             cv2.polylines(frame, [marker.corners], isClosed=True, color=(255, 0, 0), thickness=2)
             
             if not no_text:
-                text_id = f"id: {marker_id}"
-                text_coords = f"{marker.tx*1000:.0f}, {marker.ty*1000:.0f}, {marker.tz*1000:.0f})"
+                text_id = f"id={marker_id}"
+                text_coords = f"({marker.tx*1000:.0f},{marker.ty*1000:.0f},{marker.tz*1000:.0f})"
                 
                 text_pos = marker.corners[0]
-                cv2.putText(frame, text_id, (text_pos[0], text_pos[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
-                cv2.putText(frame, text_coords, (text_pos[0], text_pos[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 2)
+                cv2.putText(frame, text_id, (text_pos[0], text_pos[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
+                cv2.putText(frame, text_coords, (text_pos[0], text_pos[1] - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (255, 0, 0), 1)
 
         cv2.imshow("Client", frame)
 
