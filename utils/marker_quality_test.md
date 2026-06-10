@@ -1,44 +1,43 @@
 # ArUco Marker Quality Analysis Report
-Date: 2026-06-09 17:07:53
+Date: 2026-06-10 18:58:06
 Marker Size: 0.012 meters
-Test Duration per Location: 15 seconds
+Test Duration per Setup: 10 seconds
 
 ---
 
 ## 1. Pose Stability Ranking (Lower Average RSS is Better)
 ```
-1. Marker ID: 11, Average RSS: 0.97
-2. Marker ID: 12, Average RSS: 1.16
-3. Marker ID: 20, Average RSS: 1.30
-4. Marker ID: 16, Average RSS: 1.47
-5. Marker ID: 47, Average RSS: 1.68
-6. Marker ID: 0, Average RSS: 2.04
-7. Marker ID: 18, Average RSS: 2.24
-8. Marker ID: 46, Average RSS: 2.40
+1. Marker ID: 24  , Average RSS: 0.0463
+2. Marker ID: 26  , Average RSS: 0.7055
+3. Marker ID: 12  , Average RSS: 0.9877
+4. Marker ID: 25  , Average RSS: 1.1392
+5. Marker ID: 14  , Average RSS: 1.1886
+6. Marker ID: 0   , Average RSS: 1.9204
+7. Marker ID: 13  , Average RSS: 2.5272
+8. Marker ID: 2   , Average RSS: 2.5514
+9. Marker ID: 1   , Average RSS: 2.8630
 ```
 
 ## 2. Detection Stability Ranking (Higher Average Rate is Better)
 ```
-1. Marker ID: 20, Average Detection Rate: 100.00%
-2. Marker ID: 12, Average Detection Rate: 99.96%
-3. Marker ID: 46, Average Detection Rate: 98.53%
-4. Marker ID: 11, Average Detection Rate: 97.80%
-5. Marker ID: 18, Average Detection Rate: 97.72%
-6. Marker ID: 16, Average Detection Rate: 87.84%
-7. Marker ID: 0, Average Detection Rate: 84.16%
-8. Marker ID: 47, Average Detection Rate: 71.33%
+1. Marker ID: 13  , Average Detection Rate: 100.00%
+2. Marker ID: 26  , Average Detection Rate: 99.69%
+3. Marker ID: 25  , Average Detection Rate: 95.57%
+4. Marker ID: 2   , Average Detection Rate: 90.67%
+5. Marker ID: 0   , Average Detection Rate: 85.63%
+6. Marker ID: 24  , Average Detection Rate: 75.38%
+7. Marker ID: 12  , Average Detection Rate: 63.91%
+8. Marker ID: 14  , Average Detection Rate: 34.25%
+9. Marker ID: 1   , Average Detection Rate: 2.14%
 ```
 
-## 3. Quality Stability Ranking (Consistency Across Locations)
+## 3. Quality Stability Ranking (Lower RSS StdDev is Better)
 ```
-(Lower Standard Deviation of RSS is better)
-
-1. Marker ID: 18, RSS Std. Dev.: 0.51
-2. Marker ID: 46, RSS Std. Dev.: 0.60
-3. Marker ID: 0, RSS Std. Dev.: 0.65
-4. Marker ID: 20, RSS Std. Dev.: 0.92
-5. Marker ID: 11, RSS Std. Dev.: 0.96
-6. Marker ID: 12, RSS Std. Dev.: 0.97
-7. Marker ID: 16, RSS Std. Dev.: 1.06
-8. Marker ID: 47, RSS Std. Dev.: 1.29
+1. Marker ID: 24  , RSS Std. Dev.: 0.0214
+2. Marker ID: 2   , RSS Std. Dev.: 0.0870
+3. Marker ID: 26  , RSS Std. Dev.: 0.2322
+4. Marker ID: 12  , RSS Std. Dev.: 0.6337
+5. Marker ID: 13  , RSS Std. Dev.: 0.6435
+6. Marker ID: 25  , RSS Std. Dev.: 1.1392
+7. Marker ID: 14  , RSS Std. Dev.: 1.1886
 ```

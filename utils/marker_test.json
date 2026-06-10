@@ -1,0 +1,130 @@
+[
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 13,
+        "rss": 3.170686876979484,
+        "detection_rate": 100.0
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 25,
+        "rss": 2.2784784854231743,
+        "detection_rate": 91.13149847094802
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 26,
+        "rss": 0.4733040203297486,
+        "detection_rate": 99.38837920489296
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 2,
+        "rss": 2.638454813325628,
+        "detection_rate": 89.29663608562691
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 12,
+        "rss": 0.3539263453740241,
+        "detection_rate": 99.69418960244649
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 0,
+        "rss": 1.9204432826821949,
+        "detection_rate": 85.62691131498471
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 14,
+        "rss": 2.3771828091624263,
+        "detection_rate": 59.9388379204893
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 24,
+        "rss": 0.06772380092198248,
+        "detection_rate": 51.07033639143731
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 0,
+        "marker_id": 1,
+        "rss": 2.863010773872952,
+        "detection_rate": 2.1406727828746175
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 2,
+        "rss": 2.4644185413031043,
+        "detection_rate": 92.04892966360856
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 25,
+        "rss": 1.3438762480547963e-14,
+        "detection_rate": 100.0
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 24,
+        "rss": 0.02487219969399393,
+        "detection_rate": 99.69418960244649
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 13,
+        "rss": 1.883626895987195,
+        "detection_rate": 100.0
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 26,
+        "rss": 0.9377113765622438,
+        "detection_rate": 100.0
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 12,
+        "rss": 1.621397405183829,
+        "detection_rate": 28.134556574923547
+    },
+    {
+        "group": 1,
+        "location": "top",
+        "angle": 90,
+        "marker_id": 14,
+        "rss": 1.6378731855224217e-15,
+        "detection_rate": 8.56269113149847
+    }
+]
