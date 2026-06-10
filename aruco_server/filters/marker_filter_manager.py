@@ -1,4 +1,4 @@
-from marker_filter import MarkerFilter
+from .marker_filter import MarkerFilter
 
 
 class MarkerFilterManager:

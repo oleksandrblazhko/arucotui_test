@@ -30,10 +30,11 @@ from osc_sender import (
 
 from visualization import (
     draw_markers,
-    draw_fps
+    draw_fps,
+    draw_axes
 )
 
-from marker_filter_manager import (
+from filters.marker_filter_manager import (
     MarkerFilterManager
 )
 
@@ -90,6 +91,7 @@ def main():
 
         prev = now
 
+        rvecs, tvecs = None, None
         if ids is not None:
 
             rvecs, tvecs, _ = estimate_pose(
@@ -126,6 +128,15 @@ def main():
             frame,
             corners,
             ids
+        )
+
+        draw_axes(
+            frame,
+            camera_matrix,
+            dist_coeffs,
+            rvecs,
+            tvecs,
+            args.size
         )
 
         draw_fps(

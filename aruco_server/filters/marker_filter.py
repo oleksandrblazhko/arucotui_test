@@ -1,14 +1,13 @@
-from filters.ema_filter import EMAFilter
-# або:
-# from filters.one_euro_filter import OneEuroFilter
+from .ema_filter import EMAFilter
+from .one_euro_filter import OneEuroFilter
 
 
 class MarkerFilter:
 
     def __init__(self):
 
-        # FilterClass = OneEuroFilter
-        FilterClass = EMAFilter
+        FilterClass = OneEuroFilter
+        # FilterClass = EMAFilter
 
         self.tx = FilterClass()
         self.ty = FilterClass()

@@ -1,6 +1,6 @@
 import math
 
-from filters.base_filter import BaseFilter
+from .base_filter import BaseFilter
 
 
 class LowPassFilter:
