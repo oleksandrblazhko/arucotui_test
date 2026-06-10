@@ -20,7 +20,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--cam", type=int, default=0)
 parser.add_argument("--width", type=int, default=640)
 parser.add_argument("--height", type=int, default=480)
-parser.add_argument("--pattern", type=int, default=1, help="0 - DICT_ARUCO_ORIGINAL(5x5), 1 - DICT_4X4_1000")
+parser.add_argument("--pattern", type=int, default=1, help="0 - DICT_ARUCO_ORIGINAL(5x5), 1 - DICT_4X4_50")
 parser.add_argument("--size", type=float, default=0.015, help="ArUco marker size in meters (default: 0.015 for 15mm)")
 parser.add_argument("--flip", action="store_true", default=1, help="Flip the camera feed both horizontally and vertically")
 parser.add_argument("--win", action="store_true", default=True, help="Use Windows-specific camera backend (DSHOW)")
@@ -58,7 +58,7 @@ if not cap.isOpened():
 # -------------------------
 ARUCO_DICTS = {
     0: cv2.aruco.DICT_ARUCO_ORIGINAL,
-    1: cv2.aruco.DICT_4X4_1000,
+    1: cv2.aruco.DICT_4X4_50,
     2: cv2.aruco.DICT_APRILTAG_36h11,
 }
 aruco_dict = cv2.aruco.getPredefinedDictionary(
@@ -138,8 +138,7 @@ while True:
         for i in range(len(ids)):
             cv2.drawFrameAxes(frame, camera_matrix, dist_coeffs, rvecs[i], tvecs[i], args.size * 0.5)
 
-    cv2.putText(frame, f"FPS {fps:.1f}", (20,40),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
+    cv2.putText(frame, f"FPS {fps:.1f}", (20,40), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
 
     cv2.imshow("server", frame)
 

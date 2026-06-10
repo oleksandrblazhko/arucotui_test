@@ -36,16 +36,19 @@ def run_test(dictionary, name):
 
     start = time.time()
 
-    fx, fy = 640, 480
-    cx, cy = fx / 2, fy / 2
+    # Use globally defined camera_matrix and dist_coeffs
 
-    camera_matrix = np.array([
-        [fx, 0, cx],
-        [0, fy, cy],
-        [0, 0, 1]
-    ], dtype=np.float32)
-
-    dist = np.zeros((5, 1))
+    # If camera_ext.json was not found, initialize with default values
+    if 'camera_matrix' not in globals() or camera_matrix is None:
+        fx, fy = 640, 480
+        cx, cy = fx / 2, fy / 2
+        camera_matrix = np.array([
+            [fx, 0, cx],
+            [0, fy, cy],
+            [0, 0, 1]
+        ], dtype=np.float32)
+        dist_coeffs = np.zeros((5, 1))
+        print("WARNING: camera_ext.json not found or loaded, using default camera parameters.")
 
     while time.time() - start < TEST_TIME:
 
