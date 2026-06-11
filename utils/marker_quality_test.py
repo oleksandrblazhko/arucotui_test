@@ -5,12 +5,12 @@ import os
 import json
 import argparse
 from collections import defaultdict
+import winsound
 
 # --- Constants ---
 CAM_INDEX = 0
 MARKER_SIZE_M = 0.012  # Marker size in meters
-TEST_DURATION_S = 10   # Duration of the test for each location in seconds
-ARUCO_DICTIONARY = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+ARUCO_DICTIONARY = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_250)
 ARUCO_PARAMS = cv2.aruco.DetectorParameters()
 # Build path to camera calibration file relative to this script's location
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -38,7 +38,7 @@ def load_camera_calibration():
         dist_coeffs = np.zeros((5, 1))
         return camera_matrix, dist_coeffs
 
-def record_marker_data(cap, camera_matrix, dist_coeffs):
+def record_marker_data(cap, camera_matrix, dist_coeffs, test_duration_s):
     """
     Detects markers and records their pose data for a fixed duration.
     Returns a dictionary with marker data and the total number of frames processed.
@@ -47,9 +47,9 @@ def record_marker_data(cap, camera_matrix, dist_coeffs):
     total_frames = 0
     start_time = time.time()
 
-    print(f"Recording data for {TEST_DURATION_S} seconds...")
+    print(f"Recording data for {test_duration_s} seconds...")
 
-    while time.time() - start_time < TEST_DURATION_S:
+    while time.time() - start_time < test_duration_s:
         ret, frame = cap.read()
         if not ret:
             print("ERROR: Could not read frame from camera.")
@@ -114,7 +114,9 @@ def main():
     parser.add_argument("--width", type=int, default=640, help="Camera frame width")
     parser.add_argument("--height", type=int, default=480, help="Camera frame height")
     parser.add_argument("--num-groups", type=int, default=16, help="Number of marker groups to test")
+    parser.add_argument("--duration", type=int, default=10, help="Duration of the test for each location in seconds")
     args = parser.parse_args()
+
 
     camera_matrix, dist_coeffs = load_camera_calibration()
 
@@ -126,11 +128,11 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, args.height)
 
     locations = {
-        "top": "зверху від камери",
         "center": "у центрі перед камерою",
+        "top": "зверху від камери",
+        "bottom": "знизу від камери із разворотом на 180 градусів",
         "left": "зліва від камери",
-        "right": "зправа від камери із разворотом на 90 градусів вправо",
-        "bottom": "знизу від камери із разворотом на 180 градусів"
+        "right": "зправа від камери із разворотом на 90 градусів вправо"
     }
     angles = [0, 90, 180, 270]
     all_results = []
@@ -148,7 +150,8 @@ def main():
             for angle in angles:
                 print("\r\n" + "-"*50)
                 print(f"РОЗТАШУВАННЯ: Група #{group_num} - {loc_desc} (кут: {angle}°)")
-                
+                winsound.Beep(700, 500)
+
                 # --- Preview Loop ---
                 while True:
                     ret, frame = cap.read()
@@ -166,11 +169,11 @@ def main():
                         for i in range(len(ids)):
                             cv2.drawFrameAxes(frame, camera_matrix, dist_coeffs, rvecs[i], tvecs[i], 0.01)
                     
-                    cv2.putText(frame, f"Group: {group_num}, Location: {loc_key}, Angle: {angle} deg", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
-                    cv2.putText(frame, f"Resolution: {args.width}x{args.height}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
-                    cv2.putText(frame, "Press ENTER to START RECORDING", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-                    cv2.putText(frame, "Press 's' to SKIP to next group", (10, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 100, 0), 2)
-                    cv2.putText(frame, "Press 'q' to QUIT", (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+                    cv2.putText(frame, f"Group: {group_num}, Location: {loc_key}, Angle: {angle} deg", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+                    cv2.putText(frame, f"Resolution: {args.width}x{args.height}", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 0), 1)
+                    cv2.putText(frame, "Press ENTER to START RECORDING", (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
+                    cv2.putText(frame, "Press 's' to SKIP to next group", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 100, 0), 1)
+                    cv2.putText(frame, "Press 'q' to QUIT", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
                     cv2.imshow('Marker Quality Test Preview', frame)
                     
                     key = cv2.waitKey(1) & 0xFF
@@ -188,7 +191,7 @@ def main():
                 if loc_key == "skip": break
 
                 # --- Recording and Calculation ---
-                marker_data, total_frames = record_marker_data(cap, camera_matrix, dist_coeffs)
+                marker_data, total_frames = record_marker_data(cap, camera_matrix, dist_coeffs, args.duration)
 
                 if not marker_data:
                     print("No markers detected during recording.")
@@ -226,7 +229,7 @@ def main():
             print_and_write("# ArUco Marker Quality Analysis Report")
             print_and_write(f"Date: {time.strftime('%Y-%m-%d %H:%M:%S')}")
             print_and_write(f"Marker Size: {MARKER_SIZE_M} meters")
-            print_and_write(f"Test Duration per Setup: {TEST_DURATION_S} seconds")
+            print_and_write(f"Test Duration per Setup: {args.duration} seconds")
             print_and_write("\r\n---")
 
             # --- 1. Pose Stability Ranking (RSS) ---

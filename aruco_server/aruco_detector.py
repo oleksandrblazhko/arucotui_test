@@ -4,7 +4,7 @@ import cv2
 
 ARUCO_DICTS = {
     0: cv2.aruco.DICT_ARUCO_ORIGINAL,
-    1: cv2.aruco.DICT_4X4_50,
+    1: cv2.aruco.DICT_4X4_250,
     2: cv2.aruco.DICT_APRILTAG_36h11,
 }
 
