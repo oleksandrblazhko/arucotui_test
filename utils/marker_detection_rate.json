@@ -1,570 +1,120 @@
 [
-  {
-    "marker_ID": 13,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 17,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 49,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 62,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 41,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 10,
-    "Detection_Rate": 99.97
-  },
-  {
-    "marker_ID": 23,
-    "Detection_Rate": 99.97
-  },
-  {
-    "marker_ID": 30,
-    "Detection_Rate": 99.91
-  },
-  {
-    "marker_ID": 69,
-    "Detection_Rate": 99.27
-  },
-  {
-    "marker_ID": 50,
-    "Detection_Rate": 99.27
-  },
-  {
-    "marker_ID": 64,
-    "Detection_Rate": 98.57
-  },
-  {
-    "marker_ID": 4,
-    "Detection_Rate": 98.51
-  },
-  {
-    "marker_ID": 48,
-    "Detection_Rate": 98.38
-  },
-  {
-    "marker_ID": 5,
-    "Detection_Rate": 98.23
-  },
-  {
-    "marker_ID": 40,
-    "Detection_Rate": 97.84
-  },
-  {
-    "marker_ID": 21,
-    "Detection_Rate": 97.8
-  },
-  {
-    "marker_ID": 1,
-    "Detection_Rate": 97.8
-  },
-  {
-    "marker_ID": 43,
-    "Detection_Rate": 97.68
-  },
-  {
-    "marker_ID": 63,
-    "Detection_Rate": 96.62
-  },
-  {
-    "marker_ID": 52,
-    "Detection_Rate": 96.4
-  },
-  {
-    "marker_ID": 2,
-    "Detection_Rate": 95.76
-  },
-  {
-    "marker_ID": 37,
-    "Detection_Rate": 95.61
-  },
-  {
-    "marker_ID": 33,
-    "Detection_Rate": 95.34
-  },
-  {
-    "marker_ID": 3,
-    "Detection_Rate": 93.57
-  },
-  {
-    "marker_ID": 25,
-    "Detection_Rate": 93.08
-  },
-  {
-    "marker_ID": 16,
-    "Detection_Rate": 92.1
-  },
-  {
-    "marker_ID": 32,
-    "Detection_Rate": 91.83
-  },
-  {
-    "marker_ID": 26,
-    "Detection_Rate": 91.55
-  },
-  {
-    "marker_ID": 38,
-    "Detection_Rate": 90.61
-  },
-  {
-    "marker_ID": 45,
-    "Detection_Rate": 90.49
-  },
-  {
-    "marker_ID": 6,
-    "Detection_Rate": 90.3
-  },
-  {
-    "marker_ID": 54,
-    "Detection_Rate": 90.07
-  },
-  {
-    "marker_ID": 61,
-    "Detection_Rate": 89.79
-  },
-  {
-    "marker_ID": 71,
-    "Detection_Rate": 89.48
-  },
-  {
-    "marker_ID": 15,
-    "Detection_Rate": 88.84
-  },
-  {
-    "marker_ID": 29,
-    "Detection_Rate": 88.84
-  },
-  {
-    "marker_ID": 66,
-    "Detection_Rate": 88.78
-  },
-  {
-    "marker_ID": 24,
-    "Detection_Rate": 88.44
-  },
-  {
-    "marker_ID": 65,
-    "Detection_Rate": 88.41
-  },
-  {
-    "marker_ID": 36,
-    "Detection_Rate": 88.05
-  },
-  {
-    "marker_ID": 12,
-    "Detection_Rate": 87.9
-  },
-  {
-    "marker_ID": 14,
-    "Detection_Rate": 86.46
-  },
-  {
-    "marker_ID": 18,
-    "Detection_Rate": 84.85
-  },
-  {
-    "marker_ID": 20,
-    "Detection_Rate": 84.76
-  },
-  {
-    "marker_ID": 55,
-    "Detection_Rate": 84.7
-  },
-  {
-    "marker_ID": 27,
-    "Detection_Rate": 83.5
-  },
-  {
-    "marker_ID": 51,
-    "Detection_Rate": 82.73
-  },
-  {
-    "marker_ID": 7,
-    "Detection_Rate": 82.71
-  },
-  {
-    "marker_ID": 58,
-    "Detection_Rate": 82.13
-  },
-  {
-    "marker_ID": 44,
-    "Detection_Rate": 81.96
-  },
-  {
-    "marker_ID": 35,
-    "Detection_Rate": 81.13
-  },
-  {
-    "marker_ID": 70,
-    "Detection_Rate": 79.21
-  },
-  {
-    "marker_ID": 72,
-    "Detection_Rate": 78.63
-  },
-  {
-    "marker_ID": 59,
-    "Detection_Rate": 77.53
-  },
-  {
-    "marker_ID": 28,
-    "Detection_Rate": 75.91
-  },
-  {
-    "marker_ID": 67,
-    "Detection_Rate": 74.81
-  },
-  {
-    "marker_ID": 39,
-    "Detection_Rate": 74.22
-  },
-  {
-    "marker_ID": 31,
-    "Detection_Rate": 73.38
-  },
-  {
-    "marker_ID": 60,
-    "Detection_Rate": 73.05
-  },
-  {
-    "marker_ID": 9,
-    "Detection_Rate": 72.05
-  },
-  {
-    "marker_ID": 0,
-    "Detection_Rate": 71.99
-  },
-  {
-    "marker_ID": 11,
-    "Detection_Rate": 71.52
-  },
-  {
-    "marker_ID": 47,
-    "Detection_Rate": 70.62
-  },
-  {
-    "marker_ID": 53,
-    "Detection_Rate": 70.3
-  },
-  {
-    "marker_ID": 8,
-    "Detection_Rate": 70.09
-  },
-  {
-    "marker_ID": 56,
-    "Detection_Rate": 68.72
-  },
-  {
-    "marker_ID": 19,
-    "Detection_Rate": 67.68
-  },
-  {
-    "marker_ID": 68,
-    "Detection_Rate": 66.77
-  },
-  {
-    "marker_ID": 46,
-    "Detection_Rate": 61.33
-  },
-  {
-    "marker_ID": 57,
-    "Detection_Rate": 59.63
-  },
-  {
-    "marker_ID": 85,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 107,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 110,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 126,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 112,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 140,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 118,
-    "Detection_Rate": 100.0
-  },
-  {
-    "marker_ID": 80,
-    "Detection_Rate": 99.97
-  },
-  {
-    "marker_ID": 115,
-    "Detection_Rate": 99.97
-  },
-  {
-    "marker_ID": 136,
-    "Detection_Rate": 99.94
-  },
-  {
-    "marker_ID": 87,
-    "Detection_Rate": 99.94
-  },
-  {
-    "marker_ID": 99,
-    "Detection_Rate": 99.82
-  },
-  {
-    "marker_ID": 121,
-    "Detection_Rate": 99.36
-  },
-  {
-    "marker_ID": 142,
-    "Detection_Rate": 99.02
-  },
-  {
-    "marker_ID": 120,
-    "Detection_Rate": 98.87
-  },
-  {
-    "marker_ID": 108,
-    "Detection_Rate": 98.84
-  },
-  {
-    "marker_ID": 94,
-    "Detection_Rate": 98.2
-  },
-  {
-    "marker_ID": 125,
-    "Detection_Rate": 98.05
-  },
-  {
-    "marker_ID": 127,
-    "Detection_Rate": 97.87
-  },
-  {
-    "marker_ID": 131,
-    "Detection_Rate": 97.5
-  },
-  {
-    "marker_ID": 86,
-    "Detection_Rate": 97.41
-  },
-  {
-    "marker_ID": 129,
-    "Detection_Rate": 97.23
-  },
-  {
-    "marker_ID": 141,
-    "Detection_Rate": 96.34
-  },
-  {
-    "marker_ID": 114,
-    "Detection_Rate": 96.31
-  },
-  {
-    "marker_ID": 139,
-    "Detection_Rate": 95.85
-  },
-  {
-    "marker_ID": 74,
-    "Detection_Rate": 95.79
-  },
-  {
-    "marker_ID": 77,
-    "Detection_Rate": 95.76
-  },
-  {
-    "marker_ID": 98,
-    "Detection_Rate": 95.49
-  },
-  {
-    "marker_ID": 138,
-    "Detection_Rate": 94.09
-  },
-  {
-    "marker_ID": 132,
-    "Detection_Rate": 93.99
-  },
-  {
-    "marker_ID": 113,
-    "Detection_Rate": 93.72
-  },
-  {
-    "marker_ID": 76,
-    "Detection_Rate": 93.66
-  },
-  {
-    "marker_ID": 130,
-    "Detection_Rate": 93.45
-  },
-  {
-    "marker_ID": 109,
-    "Detection_Rate": 93.45
-  },
-  {
-    "marker_ID": 102,
-    "Detection_Rate": 93.36
-  },
-  {
-    "marker_ID": 82,
-    "Detection_Rate": 93.11
-  },
-  {
-    "marker_ID": 97,
-    "Detection_Rate": 92.99
-  },
-  {
-    "marker_ID": 90,
-    "Detection_Rate": 92.87
-  },
-  {
-    "marker_ID": 111,
-    "Detection_Rate": 92.65
-  },
-  {
-    "marker_ID": 103,
-    "Detection_Rate": 92.41
-  },
-  {
-    "marker_ID": 75,
-    "Detection_Rate": 92.23
-  },
-  {
-    "marker_ID": 93,
-    "Detection_Rate": 91.34
-  },
-  {
-    "marker_ID": 106,
-    "Detection_Rate": 91.25
-  },
-  {
-    "marker_ID": 91,
-    "Detection_Rate": 91.13
-  },
-  {
-    "marker_ID": 83,
-    "Detection_Rate": 89.21
-  },
-  {
-    "marker_ID": 123,
-    "Detection_Rate": 89.18
-  },
-  {
-    "marker_ID": 89,
-    "Detection_Rate": 89.15
-  },
-  {
-    "marker_ID": 116,
-    "Detection_Rate": 89.13
-  },
-  {
-    "marker_ID": 96,
-    "Detection_Rate": 88.81
-  },
-  {
-    "marker_ID": 128,
-    "Detection_Rate": 87.23
-  },
-  {
-    "marker_ID": 73,
-    "Detection_Rate": 87.13
-  },
-  {
-    "marker_ID": 95,
-    "Detection_Rate": 86.8
-  },
-  {
-    "marker_ID": 119,
-    "Detection_Rate": 86.68
-  },
-  {
-    "marker_ID": 134,
-    "Detection_Rate": 86.43
-  },
-  {
-    "marker_ID": 78,
-    "Detection_Rate": 85.73
-  },
-  {
-    "marker_ID": 104,
-    "Detection_Rate": 85.46
-  },
-  {
-    "marker_ID": 122,
-    "Detection_Rate": 85.4
-  },
-  {
-    "marker_ID": 81,
-    "Detection_Rate": 85.18
-  },
-  {
-    "marker_ID": 88,
-    "Detection_Rate": 84.66
-  },
-  {
-    "marker_ID": 79,
-    "Detection_Rate": 82.68
-  },
-  {
-    "marker_ID": 101,
-    "Detection_Rate": 82.64
-  },
-  {
-    "marker_ID": 124,
-    "Detection_Rate": 81.1
-  },
-  {
-    "marker_ID": 100,
-    "Detection_Rate": 78.69
-  },
-  {
-    "marker_ID": 84,
-    "Detection_Rate": 75.21
-  },
-  {
-    "marker_ID": 144,
-    "Detection_Rate": 74.39
-  },
-  {
-    "marker_ID": 92,
-    "Detection_Rate": 73.88
-  },
-  {
-    "marker_ID": 105,
-    "Detection_Rate": 72.22
-  },
-  {
-    "marker_ID": 143,
-    "Detection_Rate": 70.96
-  },
-  {
-    "marker_ID": 133,
-    "Detection_Rate": 66.82
-  },
-  {
-    "marker_ID": 117,
-    "Detection_Rate": 62.76
-  },
-  {
-    "marker_ID": 137,
-    "Detection_Rate": 58.48
-  },
-  {
-    "marker_ID": 135,
-    "Detection_Rate": 43.76
-  }
+  { "marker_ID": 13, "Detection_Rate": 100.0 },
+  { "marker_ID": 17, "Detection_Rate": 100.0 },
+  { "marker_ID": 49, "Detection_Rate": 100.0 },
+  { "marker_ID": 62, "Detection_Rate": 100.0 },
+  { "marker_ID": 41, "Detection_Rate": 100.0 },
+  { "marker_ID": 85, "Detection_Rate": 100.0 },
+  { "marker_ID": 107, "Detection_Rate": 100.0 },
+  { "marker_ID": 110, "Detection_Rate": 100.0 },
+  { "marker_ID": 126, "Detection_Rate": 100.0 },
+  { "marker_ID": 112, "Detection_Rate": 100.0 },
+  { "marker_ID": 140, "Detection_Rate": 100.0 },
+  { "marker_ID": 118, "Detection_Rate": 100.0 },
+  { "marker_ID": 10, "Detection_Rate": 99.97 },
+  { "marker_ID": 23, "Detection_Rate": 99.97 },
+  { "marker_ID": 80, "Detection_Rate": 99.97 },
+  { "marker_ID": 115, "Detection_Rate": 99.97 },
+  { "marker_ID": 30, "Detection_Rate": 99.91 },
+  { "marker_ID": 136, "Detection_Rate": 99.94 },
+  { "marker_ID": 87, "Detection_Rate": 99.94 },
+  { "marker_ID": 99, "Detection_Rate": 99.82 },
+  { "marker_ID": 69, "Detection_Rate": 99.27 },
+  { "marker_ID": 50, "Detection_Rate": 99.27 },
+  { "marker_ID": 121, "Detection_Rate": 99.36 },
+  { "marker_ID": 142, "Detection_Rate": 99.02 },
+  { "marker_ID": 120, "Detection_Rate": 98.87 },
+  { "marker_ID": 108, "Detection_Rate": 98.84 },
+  { "marker_ID": 94, "Detection_Rate": 98.2 },
+  { "marker_ID": 125, "Detection_Rate": 98.05 },
+  { "marker_ID": 127, "Detection_Rate": 97.87 },
+  { "marker_ID": 4, "Detection_Rate": 98.51 },
+  { "marker_ID": 48, "Detection_Rate": 98.38 },
+  { "marker_ID": 5, "Detection_Rate": 98.23 },
+  { "marker_ID": 40, "Detection_Rate": 97.84 },
+  { "marker_ID": 21, "Detection_Rate": 97.8 },
+  { "marker_ID": 1, "Detection_Rate": 97.8 },
+  { "marker_ID": 43, "Detection_Rate": 97.68 },
+  { "marker_ID": 63, "Detection_Rate": 96.62 },
+  { "marker_ID": 52, "Detection_Rate": 96.4 },
+  { "marker_ID": 131, "Detection_Rate": 97.5 },
+  { "marker_ID": 86, "Detection_Rate": 97.41 },
+  { "marker_ID": 129, "Detection_Rate": 97.23 },
+  { "marker_ID": 141, "Detection_Rate": 96.34 },
+  { "marker_ID": 114, "Detection_Rate": 96.31 },
+  { "marker_ID": 139, "Detection_Rate": 95.85 },
+  { "marker_ID": 74, "Detection_Rate": 95.79 },
+  { "marker_ID": 77, "Detection_Rate": 95.76 },
+  { "marker_ID": 98, "Detection_Rate": 95.49 },
+  { "marker_ID": 138, "Detection_Rate": 94.09 },
+  { "marker_ID": 132, "Detection_Rate": 93.99 },
+  { "marker_ID": 113, "Detection_Rate": 93.72 },
+  { "marker_ID": 76, "Detection_Rate": 93.66 },
+  { "marker_ID": 130, "Detection_Rate": 93.45 },
+  { "marker_ID": 109, "Detection_Rate": 93.45 },
+  { "marker_ID": 102, "Detection_Rate": 93.36 },
+  { "marker_ID": 82, "Detection_Rate": 93.11 },
+  { "marker_ID": 97, "Detection_Rate": 92.99 },
+  { "marker_ID": 90, "Detection_Rate": 92.87 },
+  { "marker_ID": 111, "Detection_Rate": 92.65 },
+  { "marker_ID": 103, "Detection_Rate": 92.41 },
+  { "marker_ID": 75, "Detection_Rate": 92.23 },
+  { "marker_ID": 93, "Detection_Rate": 91.34 },
+  { "marker_ID": 106, "Detection_Rate": 91.25 },
+  { "marker_ID": 91, "Detection_Rate": 91.13 },
+  { "marker_ID": 16, "Detection_Rate": 92.1 },
+  { "marker_ID": 32, "Detection_Rate": 91.83 },
+  { "marker_ID": 26, "Detection_Rate": 91.55 },
+  { "marker_ID": 38, "Detection_Rate": 90.61 },
+  { "marker_ID": 45, "Detection_Rate": 90.49 },
+  { "marker_ID": 6, "Detection_Rate": 90.3 },
+  { "marker_ID": 54, "Detection_Rate": 90.07 },
+  { "marker_ID": 61, "Detection_Rate": 89.79 },
+  { "marker_ID": 71, "Detection_Rate": 89.48 },
+  { "marker_ID": 83, "Detection_Rate": 89.21 },
+  { "marker_ID": 123, "Detection_Rate": 89.18 },
+  { "marker_ID": 89, "Detection_Rate": 89.15 },
+  { "marker_ID": 116, "Detection_Rate": 89.13 },
+  { "marker_ID": 15, "Detection_Rate": 88.84 },
+  { "marker_ID": 29, "Detection_Rate": 88.84 },
+  { "marker_ID": 66, "Detection_Rate": 88.78 },
+  { "marker_ID": 24, "Detection_Rate": 88.44 },
+  { "marker_ID": 65, "Detection_Rate": 88.41 },
+  { "marker_ID": 36, "Detection_Rate": 88.05 },
+  { "marker_ID": 12, "Detection_Rate": 87.9 },
+  { "marker_ID": 128, "Detection_Rate": 87.23 },
+  { "marker_ID": 73, "Detection_Rate": 87.13 },
+  { "marker_ID": 95, "Detection_Rate": 86.8 },
+  { "marker_ID": 119, "Detection_Rate": 86.68 },
+  { "marker_ID": 14, "Detection_Rate": 86.46 },
+  { "marker_ID": 18, "Detection_Rate": 84.85 },
+  { "marker_ID": 20, "Detection_Rate": 84.76 },
+  { "marker_ID": 55, "Detection_Rate": 84.7 },
+  { "marker_ID": 27, "Detection_Rate": 83.5 },
+  { "marker_ID": 51, "Detection_Rate": 82.73 },
+  { "marker_ID": 7, "Detection_Rate": 82.71 },
+  { "marker_ID": 58, "Detection_Rate": 82.13 },
+  { "marker_ID": 44, "Detection_Rate": 81.96 },
+  { "marker_ID": 35, "Detection_Rate": 81.13 },
+  { "marker_ID": 70, "Detection_Rate": 79.21 },
+  { "marker_ID": 72, "Detection_Rate": 78.63 },
+  { "marker_ID": 59, "Detection_Rate": 77.53 },
+  { "marker_ID": 28, "Detection_Rate": 75.91 },
+  { "marker_ID": 67, "Detection_Rate": 74.81 },
+  { "marker_ID": 39, "Detection_Rate": 74.22 },
+  { "marker_ID": 31, "Detection_Rate": 73.38 },
+  { "marker_ID": 60, "Detection_Rate": 73.05 },
+  { "marker_ID": 9, "Detection_Rate": 72.05 },
+  { "marker_ID": 0, "Detection_Rate": 71.99 },
+  { "marker_ID": 11, "Detection_Rate": 71.52 },
+  { "marker_ID": 47, "Detection_Rate": 70.62 },
+  { "marker_ID": 53, "Detection_Rate": 70.3 },
+  { "marker_ID": 8, "Detection_Rate": 70.09 },
+  { "marker_ID": 56, "Detection_Rate": 68.72 },
+  { "marker_ID": 19, "Detection_Rate": 67.68 },
+  { "marker_ID": 68, "Detection_Rate": 66.77 },
+  { "marker_ID": 46, "Detection_Rate": 61.33 },
+  { "marker_ID": 57, "Detection_Rate": 59.63 },
+  { "marker_ID": 137, "Detection_Rate": 58.48 },
+  { "marker_ID": 135, "Detection_Rate": 43.76 }
 ]
