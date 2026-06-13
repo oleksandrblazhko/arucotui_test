@@ -10,7 +10,7 @@ from collections import deque
 # ==========================================================
 
 JSON_FILE = "marker_detection_rate.json"
-OUTPUT_CSV = "aruco_analysis.csv"
+OUTPUT_CSV = "marker_analysyze_2.csv"
 
 DICT = aruco.getPredefinedDictionary(
     aruco.DICT_4X4_250
